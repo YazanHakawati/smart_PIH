@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>التحكم الذكي</title>
+    <title>PIH</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <style>
         /* Paste the provided CSS here, including the adjustments below */
         @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap');
@@ -29,13 +28,17 @@
           font-family: 'Almarai', sans-serif;
         }
 
+        html { /* Apply smooth scroll to the whole page */
+             scroll-behavior: smooth;
+        }
+
         body {
           background: linear-gradient(-45deg, #63e2d1, #4fb3a9, #378f85, #297d72);
           background-size: 400% 400%;
           animation: gradientBG 10s ease infinite;
           color: var(--black);
           direction: rtl;
-          scroll-behavior: smooth;
+           /* scroll-behavior: smooth; */ /* Moved to html element */
            /* Allow body scroll when menu isn't controlling viewport height */
         }
 
@@ -51,27 +54,6 @@
           padding: 0 20px;
         }
 
-        /* Optional Header */
-        /*
-        header {
-          background-color: rgba(255, 255, 255, 0.9);
-          padding: 30px 0;
-          text-align: center;
-          box-shadow: 0 2px 10px var(--shadow);
-        }
-
-        header h1 {
-          font-size: 2.5rem;
-          color: var(--primary-dark);
-          margin-bottom: 10px;
-        }
-
-        .subtitle {
-          font-size: 1.2rem;
-          color: var(--black);
-        }
-        */
-
         /* --- Navigation --- */
         .main-nav {
          /* Style the container holding the button if needed */
@@ -79,6 +61,7 @@
          height: 60px; /* Example height */
          background-color: rgba(255, 255, 255, 0.9); /* Example background */
          box-shadow: 0 2px 5px var(--shadow);
+         /* This nav element is mostly structural now, the burger is fixed */
         }
 
         .burger-icon {
@@ -109,6 +92,7 @@
             padding-top: 60px; /* Space for burger icon */
             transition: transform 0.3s ease-in-out;
             transform: translateX(-100%); /* Hide off-screen left */
+            overflow-y: auto; /* Allow scrolling if links exceed height */
         }
 
         .main-nav-links.active {
@@ -153,11 +137,13 @@
            /* If using scroll snapping, uncomment below */
           /* scroll-snap-align: start;
           min-height: 100vh; */
-          padding: 40px 0px; /* Reduced side padding, handled by container */
+          padding: 60px 0px; /* INCREASED top/bottom padding */
           background-color: rgba(255, 255, 255, 0.95);
           /* Removed flex centering to allow natural document flow */
           margin-bottom: 20px; /* Space between sections */
           border-bottom: 1px solid var(--gray-medium);
+           position: relative; /* Needed for potential absolute positioned elements inside */
+           scroll-margin-top: 60px; /* Offset scroll position due to fixed nav */
         }
          .section:last-child {
             border-bottom: none;
@@ -205,6 +191,90 @@
           border-left: none;
         }
         /* --- End Vertical Scroll & Sections --- */
+
+        /* --- Introduction Section --- */
+        #introduction {
+             /* Special styles if needed, maybe different background? */
+             /* background-color: rgba(255, 255, 255, 1); */
+        }
+        .intro-text {
+            text-align: center;
+            line-height: 1.8;
+        }
+         .intro-text h2 {
+             font-size: 2.2rem;
+             color: var(--primary-dark);
+             margin-bottom: 15px;
+         }
+         .intro-text p {
+             font-size: 1.1rem;
+             margin-bottom: 15px;
+              color: var(--black);
+         }
+         .intro-text .explore-prompt {
+              font-weight: 700;
+              font-size: 1.2rem;
+              color: var(--accent);
+              margin-top: 25px;
+         }
+         /* Styling the list within intro text */
+         .intro-text ul {
+            display: inline-block; /* Center the list block */
+            text-align: right; /* Align text inside list to right */
+            margin-top: 20px;
+            padding: 0;
+            list-style: none;
+         }
+         .intro-text ul li {
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+         }
+          .intro-text ul li i { /* Style icons in the list */
+             margin-left: 10px; /* Space after icon in RTL */
+             color: var(--primary-medium);
+             width: 20px;
+             display: inline-block;
+          }
+         .intro-text .start-prompt {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+         }
+
+         /* Intro Carousel Specific Styles */
+         .intro-carousel-container .carousel {
+            height: 250px; /* Adjust height for intro slides */
+         }
+          .intro-carousel-container .carousel-slide a {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             justify-content: center;
+             text-decoration: none;
+             color: inherit;
+             height: 100%;
+             padding: 15px;
+             transition: background-color 0.3s;
+             cursor: pointer; /* Indicate it's clickable */
+          }
+           .intro-carousel-container .carousel-slide a:hover {
+              background-color: rgba(0,0,0, 0.03);
+              border-radius: 8px; /* Match slide image radius */
+           }
+
+          .intro-icon {
+             font-size: 4rem; /* Large icon */
+             color: var(--primary-dark);
+             margin-bottom: 15px;
+          }
+           .slide-subtitle {
+              font-size: 1.3rem;
+              font-weight: 700;
+              color: var(--accent);
+              text-align: center;
+          }
+        /* --- End Introduction Section --- */
 
 
         /* --- Feature Card & Grids --- */
@@ -331,6 +401,7 @@
             height: 100%;
             text-align: center;
              animation: fadeEffect 0.5s ease-in-out; /* Fade transition */
+             overflow: hidden; /* Ensure content like subtitles don't overflow badly */
         }
 
         .carousel-slide.active {
@@ -370,11 +441,11 @@
         }
 
         .carousel-btn.prev {
-          left: 15px; /* Position left for RTL prev */
+          right: 15px; /* Position left for RTL prev */
         }
 
         .carousel-btn.next {
-          right: 15px; /* Position right for RTL next */
+          left: 15px; /* Position right for RTL next */
         }
         /* --- End Main Carousel --- */
 
@@ -387,6 +458,8 @@
             cursor: pointer; /* Indicate it's scrollable/interactive */
             width: 100%; /* Takes full width of its parent */
              margin-top: 15px; /* Space above */
+             background-color: var(--gray-medium); /* Background for contrast */
+             padding: 5px;
         }
 
         .mini-carousel {
@@ -395,7 +468,7 @@
             scroll-snap-type: x mandatory; /* Snap scrolling */
             scroll-behavior: smooth;
             gap: 10px; /* Space between images */
-            padding: 10px; /* Padding inside the scroll area */
+            padding: 5px; /* Padding inside the scroll area */
              width: 100%; /* Ensure it fills the container */
              -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
@@ -406,12 +479,13 @@
 
         .mini-carousel img {
             flex-shrink: 0; /* Prevent images from shrinking */
-            width: 75%; /* Show more than one image potentially */
-             max-width: 250px; /* Max width for an image */
-            height: auto;
-            border-radius: 8px;
-            object-fit: contain;
+            width: 60%; /* Adjust width */
+             max-width: 200px; /* Max width for an image */
+            height: 120px; /* Fixed height */
+            border-radius: 6px; /* Slightly smaller radius */
+            object-fit: cover; /* Cover ensures image fills space */
              scroll-snap-align: center; /* Snap images to center */
+             background-color: var(--white); /* BG for contain images */
         }
         /* --- End Mini Carousel --- */
 
@@ -524,14 +598,6 @@
         }
 
         .sensor-item {
-          /* display: flex; */ /* Let feature-card handle background/padding */
-          /* flex-direction: column; */
-          /* gap: 15px; */
-          /* background: var(--gray-light); */
-          /* border-radius: 12px; */
-          /* padding: 20px; */
-          /* box-shadow: 0 4px 8px var(--shadow); */
-          /* align-items: stretch; */
            /* Inherits from feature-card now */
         }
          .sensor-item h3 {
@@ -539,7 +605,6 @@
              color: var(--primary-dark);
          }
         .sensor-info {
-          /* Styles for the text part if needed */
            margin-bottom: 15px; /* Space between text and carousel */
         }
         /* mini-carousel styles applied above */
@@ -548,8 +613,6 @@
 
         /* --- Intercom Section --- */
         .intercom-options {
-          /* display: flex; */ /* Use grid instead? */
-          /* flex-direction: column; */
            display: grid; /* Switch to grid */
            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Grid layout */
           gap: 30px;
@@ -557,18 +620,10 @@
         }
 
         .intercom-card {
-          /* background: var(--gray-light); */
-          /* border-radius: 12px; */
-          /* padding: 20px; */
-          /* box-shadow: 0 4px 8px var(--shadow); */
-          /* display: flex; */
-          /* flex-direction: column; */ /* Default stacking inside card */
-          /* gap: 15px; */
            /* Inherits from feature-card */
         }
 
         .intercom-details {
-           /* Style details block if needed */
             margin-bottom: 20px; /* Space before image/carousel */
         }
 
@@ -587,7 +642,6 @@
           text-align: center;
           margin-top: 15px;
         }
-        /* Renamed from intercom-single-image for clarity */
         .intercom-card .featured-image {
           max-width: 80%; /* Adjust size */
           height: auto;
@@ -609,9 +663,6 @@
 
         .voice-device-card {
            /* Inherits from feature-card */
-           /* display: flex; */
-           /* flex-direction: column; */ /* Default stacking */
-           /* gap: 20px; */ /* Increased gap */
         }
 
          .voice-device-card h3 {
@@ -626,7 +677,6 @@
          }
 
         .voice-device-details {
-           /* Style details block */
             margin-bottom: 15px;
         }
 
@@ -664,10 +714,7 @@
             font-weight: 500;
         }
 
-        .system-features .check-list { /* Style check list in this context */
-          /* display: grid; */ /* Maybe not grid here? */
-          /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
-          /* gap: 1rem; */
+        .system-features .check-list {
            /* Uses default check-list style */
         }
 
@@ -725,8 +772,6 @@
         /* --- End Voice Control Section --- */
 
          /* --- App Section --- */
-         /* Add specific styles for app section if needed */
-         /* e.g., .smartlife-options, .smartlife-card etc. from original css if used */
          .app-buttons {
              margin-top: 20px;
              text-align: center;
@@ -751,7 +796,6 @@
             border: 5px solid var(--white);
             box-shadow: 0 4px 10px var(--shadow);
          }
-
          /* --- End App Section --- */
 
 
@@ -772,6 +816,11 @@
           .container { padding: 0 15px; }
           .section h2 { font-size: 1.8rem; }
           .section h3 { font-size: 1.3rem; }
+           .intro-text h2 { font-size: 1.9rem; } /* Adjust intro heading */
+           .intro-icon { font-size: 3rem; } /* Adjust intro icon size */
+           .slide-subtitle { font-size: 1.1rem; } /* Adjust intro subtitle */
+           .intro-carousel-container .carousel { height: 220px; } /* Adjust intro carousel height */
+
 
           /* Adjust grids for smaller screens */
           .features-grid, .specs-grid, .benefits-grid, .sensor-list, .intercom-options, .voice-devices {
@@ -783,10 +832,13 @@
 
            /* Adjust carousels */
            .carousel-container { width: 95%; }
-           .carousel { height: 300px; } /* Adjust height */
+           /* Ensure intro carousel height overrides generic carousel height */
+            .intro-carousel-container .carousel { height: 220px !important; }
+            .carousel:not(.intro-carousel-container .carousel) { height: 300px; } /* Adjust general carousel height */
+
            .carousel-btn { font-size: 1.5rem; padding: 8px 12px; }
 
-           .mini-carousel img { width: 60%; max-width: 200px;} /* Adjust mini carousel images */
+           .mini-carousel img { width: 50%; max-width: 150px; height: 100px;} /* Adjust mini carousel images */
 
            .featured-image { max-height: 250px; }
 
@@ -795,37 +847,9 @@
            .app-buttons img { height: 40px; }
            .app-qr-code { max-width: 150px !important;}
 
-            /* Voice section adjustments from original CSS */
+            /* Voice section adjustments */
            .voice-device-card .featured-image { max-width: 50%; max-height: 150px;}
-           .voice-device-card .featured-video { /* Adjust video if needed */ }
 
-            /* Example from original CSS - check if these selectors exist/are needed */
-           /*
-           .smartlife-options {
-             flex-direction: column; // Stack instead of row
-             gap: 1rem;
-           }
-           .smartlife-card {
-             width: 100%; // Full width
-           }
-           .smartlife-single-image {
-            width: 30%; // Adjust image size
-            max-width: 80px;
-           }
-           .device-header { // Voice device header adjustments
-             flex-direction: column;
-             text-align: center;
-           }
-           .device-image {
-             margin: 1rem 0 0 0;
-           }
-           .demo-video {
-             height: 150px;
-           }
-           .system-features .check-list {
-             grid-template-columns: 1fr;
-           }
-           */
         }
         /* --- End Responsive Design --- */
 
@@ -837,24 +861,110 @@
     <button class="burger-icon" id="burgerMenuBtn" aria-label="Toggle navigation">☰</button>
     <div class="main-nav-links" id="mainNavLinks">
         <ul>
-            <li><a href="#lighting">الإضاءة الذكية</a></li>
-            <li><a href="#curtains">الستائر الذكية</a></li>
-            <li><a href="#boiler">الغلاية الذكية</a></li>
-            <li><a href="#sensors">الحساسات</a></li>
-            <li><a href="#intercom">الإنتركم</a></li>
-            <li><a href="#voice">التحكم الصوتي</a></li>
-            <li><a href="#app">تطبيق الهاتف</a></li>
-        </ul>
+             <li><a href="#introduction" class="intro-nav-link">الرئيسية</a></li>
+            <li><a href="#lighting" class="intro-nav-link">الإضاءة الذكية</a></li>
+            <li><a href="#curtains" class="intro-nav-link">الستائر الذكية</a></li>
+            <li><a href="#boiler" class="intro-nav-link">الغلاية الذكية</a></li>
+            <li><a href="#sensors" class="intro-nav-link">الحساسات</a></li>
+            <li><a href="#intercom" class="intro-nav-link">الإنتركم</a></li>
+            <li><a href="#voice" class="intro-nav-link">التحكم الصوتي</a></li>
+            <li><a href="#app" class="intro-nav-link">تطبيق الهاتف</a></li>
+            </ul>
     </div>
 </nav>
 
 <main class="vertical-scroll">
+
+    <section id="introduction" class="section">
+        <div class="container">
+            <div class="feature-card intro-text">
+                <h2>مرحباً بك في صفحتنا التفاعلية! ✨</h2>
+                <p>هنا يمكنك استكشاف <strong>منتجات نظام PIH</strong> بطريقة سهلة وسريعة.</p>
+                <p>اختر أي قسم يهمك من القائمة، وانطلق مباشرةً إلى التفاصيل!</p>
+                <p class="explore-prompt">👇 تصفح حسب اهتمامك:</p>
+            </div>
+
+            <div class="feature-card">
+                <h3 style="text-align: center; margin-bottom: 20px;">استكشف الأقسام</h3>
+                 <div class="carousel-container intro-carousel-container">
+                     <button class="carousel-btn prev" aria-label="Previous section">&#10094;</button>
+                     <div class="carousel">
+                         <div class="carousel-slide active">
+                             <a href="#lighting" class="intro-nav-link">
+                                 <div class="intro-slide-content">
+                                     <i class="fas fa-lightbulb intro-icon"></i>
+                                     <div class="slide-subtitle">الإضاءة الذكية</div>
+                                     <p style="font-size: 0.9em; margin-top: 5px;">تحكم بإضاءة منزلك بلمسة أو عن بعد!</p>
+                                 </div>
+                             </a>
+                         </div>
+                         <div class="carousel-slide">
+                             <a href="#curtains" class="intro-nav-link">
+                                  <div class="intro-slide-content">
+                                     <i class="fas fa-window-maximize intro-icon"></i>
+                                     <div class="slide-subtitle">الستائر الذكية</div>
+                                      <p style="font-size: 0.9em; margin-top: 5px;">افتح أو أغلق الستائر تلقائياً أو بصوتك!</p>
+                                 </div>
+                             </a>
+                         </div>
+                          <div class="carousel-slide">
+                             <a href="#boiler" class="intro-nav-link">
+                                 <div class="intro-slide-content">
+                                     <i class="fas fa-temperature-high intro-icon"></i>
+                                     <div class="slide-subtitle">الغلاية الذكية</div>
+                                      <p style="font-size: 0.9em; margin-top: 5px;">اضبط حرارة الماء في أي وقت ومن أي مكان.</p>
+                                 </div>
+                             </a>
+                         </div>
+                         <div class="carousel-slide">
+                             <a href="#sensors" class="intro-nav-link">
+                                 <div class="intro-slide-content">
+                                     <i class="fas fa-wifi intro-icon"></i> <div class="slide-subtitle">الحساسات</div>
+                                     <p style="font-size: 0.9em; margin-top: 5px;">راقب الحركة، الحرارة، الرطوبة والمزيد.</p>
+                                 </div>
+                             </a>
+                         </div>
+                          <div class="carousel-slide">
+                             <a href="#intercom" class="intro-nav-link">
+                                  <div class="intro-slide-content">
+                                     <i class="fas fa-door-open intro-icon"></i>
+                                     <div class="slide-subtitle">الإنتركم الذكي</div>
+                                      <p style="font-size: 0.9em; margin-top: 5px;">تواصل مع زوارك عبر الهاتف أو الكاميرا.</p>
+                                 </div>
+                             </a>
+                         </div>
+                         <div class="carousel-slide">
+                             <a href="#voice" class="intro-nav-link">
+                                  <div class="intro-slide-content">
+                                     <i class="fas fa-microphone-alt intro-icon"></i>
+                                     <div class="slide-subtitle">التحكم الصوتي</div>
+                                      <p style="font-size: 0.9em; margin-top: 5px;">تحكم بكل الأجهزة باستخدام صوتك.</p>
+                                 </div>
+                             </a>
+                         </div>
+                         <div class="carousel-slide">
+                             <a href="#app" class="intro-nav-link">
+                                  <div class="intro-slide-content">
+                                     <i class="fas fa-mobile-alt intro-icon"></i>
+                                     <div class="slide-subtitle">تطبيق الهاتف</div>
+                                      <p style="font-size: 0.9em; margin-top: 5px;">إدارة كاملة للنظام عبر تطبيق الهاتف!</p>
+                                 </div>
+                             </a>
+                         </div>
+                     </div>
+                     <button class="carousel-btn next" aria-label="Next section">&#10095;</button>
+                 </div>
+                 <p class="start-prompt" style="text-align:center; margin-top: 25px;">🚀 اختر أي قسم أعلاه وابدأ رحلة التحكم الذكي!</p>
+            </div>
+        </div>
+    </section>
+
     <section id="lighting" class="section">
         <div class="container">
             <h2>💡 مفاتيح الإضاءة الذكية</h2>
 
             <div class="features-grid">
-                 <div class="feature-card feature-item">
+                <div class="feature-card feature-item">
                     <h3>✨ المفاتيح المتوفرة:</h3>
                     <ul class="check-list">
                         <li>مفتاح مفرد</li>
@@ -863,7 +973,6 @@
                         <li>مفتاح رباعي</li>
                     </ul>
                 </div>
-
                 <div class="feature-card feature-item">
                     <h3>🎨 الألوان المتاحة:</h3>
                     <ul class="dot-list">
@@ -871,7 +980,6 @@
                         <li>⚫ أسود</li>
                     </ul>
                 </div>
-
                 <div class="feature-card feature-item">
                     <h3>⚙️ طريقة العمل والتوصيل:</h3>
                     <ul class="info-list">
@@ -880,7 +988,6 @@
                         <li><i class="fas fa-exchange-alt"></i> تدعم الفكسل (لاسلكياً)</li>
                     </ul>
                 </div>
-
                 <div class="feature-card feature-item">
                     <h3>🔧 ملاحظات فنية:</h3>
                     <ul class="note-list">
@@ -889,8 +996,10 @@
                         <li>📌 توصيل آمن</li>
                     </ul>
                 </div>
-            </div> <div class="feature-card"> <p class="highlight">🚀 اختر المفتاح المناسب لك واستمتع بتجربة إضاءة ذكية!</p>
+            </div>
 
+             <div class="feature-card">
+                <p class="highlight">🚀 اختر المفتاح المناسب لك واستمتع بتجربة إضاءة ذكية!</p>
                  <div class="carousel-container">
                      <button class="carousel-btn prev" aria-label="Previous image">&#10094;</button>
                      <div class="carousel">
@@ -912,8 +1021,8 @@
     <section id="curtains" class="section">
         <div class="container">
              <h2>🪟 مفاتيح التحكم بالستائر الكهربائية (الأبجور)</h2>
-
-            <div class="features-grid"> <div class="feature-card feature-item">
+            <div class="features-grid">
+                 <div class="feature-card feature-item">
                      <div class="feature-icon">1️⃣</div>
                      <h3>مفتاح أبجور مفرد</h3>
                      <ul class="list">
@@ -921,7 +1030,6 @@
                          <li>مثالي للغرف الفردية</li>
                      </ul>
                  </div>
-
                  <div class="feature-card feature-item">
                      <div class="feature-icon">2️⃣</div>
                      <h3>مفتاح أبجور مزدوج</h3>
@@ -930,7 +1038,6 @@
                          <li>للنوافذ المزدوجة</li>
                      </ul>
                  </div>
-
                  <div class="feature-card feature-item">
                      <div class="feature-icon">3️⃣💡</div>
                      <h3>مفتاح أبجور مع إضاءة</h3>
@@ -939,7 +1046,9 @@
                          <li>تحكم متكامل</li>
                      </ul>
                  </div>
-            </div> <div class="feature-card"> <h3>⚙️ مميزات النظام:</h3>
+            </div>
+            <div class="feature-card">
+                <h3>⚙️ مميزات النظام:</h3>
                 <ul class="check-list">
                     <li>تحكم سلس</li>
                     <li>تحكم عن بعد بالتطبيق</li>
@@ -948,8 +1057,8 @@
                     <li>برمجة وضعيات (مثل 50%)</li>
                 </ul>
             </div>
-
-            <div class="feature-card"> <h3>🎛️ خيارات التحكم:</h3>
+            <div class="feature-card">
+                <h3>🎛️ خيارات التحكم:</h3>
                 <ul class="control-list">
                     <li><i class="fas fa-hand-pointer"></i> لمسي مباشر</li>
                     <li><i class="fas fa-microphone"></i> تحكم صوتي</li>
@@ -957,11 +1066,11 @@
                     <li><i class="fas fa-mobile-alt"></i> تحكم عن بعد</li>
                 </ul>
             </div>
-
-            <div class="feature-card tip-box"> <p>💡 <strong>نصيحة:</strong> يمكنك برمجة الستائر للفتح مع شروق الشمس أو الإغلاق عند الغروب!</p>
+            <div class="feature-card tip-box">
+                <p>💡 <strong>نصيحة:</strong> يمكنك برمجة الستائر للفتح مع شروق الشمس أو الإغلاق عند الغروب!</p>
             </div>
-
-            <div class="feature-card"> <h3>صور مفاتيح الستائر</h3>
+            <div class="feature-card">
+                 <h3>صور مفاتيح الستائر</h3>
                  <div class="carousel-container">
                      <button class="carousel-btn prev" aria-label="Previous image">&#10094;</button>
                      <div class="carousel">
@@ -979,8 +1088,8 @@
     <section id="boiler" class="section">
         <div class="container">
              <h2>♨️ مفاتيح التحكم بغلاية المياه (البويلر)</h2>
-
-            <div class="feature-card boiler-header"> <div class="boiler-intro">
+            <div class="feature-card boiler-header">
+                 <div class="boiler-intro">
                     <h3>✨ مواصفات المفتاح:</h3>
                     <ul class="icon-list">
                         <li><i class="fas fa-box-open"></i> <strong>تصميم مستقل</strong></li>
@@ -992,8 +1101,9 @@
                      <img src="15.png" alt="مفتاح تحكم الغلاية الذكي" class="featured-image">
                  </div>
             </div>
-
-            <div class="specs-grid"> <div class="specs-card"> <div class="specs-icon"><i class="fas fa-cogs"></i></div>
+            <div class="specs-grid">
+                <div class="specs-card">
+                    <div class="specs-icon"><i class="fas fa-cogs"></i></div>
                     <h3>⚙️ طريقة العمل:</h3>
                     <ul class="check-list">
                         <li>تحكم تشغيل/إيقاف</li>
@@ -1002,7 +1112,6 @@
                         <li>إشعارات أعطال</li>
                     </ul>
                 </div>
-
                 <div class="specs-card">
                     <div class="specs-icon"><i class="fas fa-plug"></i></div>
                     <h3>🔌 متطلبات التوصيل:</h3>
@@ -1012,7 +1121,6 @@
                         <li>توصيل آمن</li>
                     </ul>
                 </div>
-
                 <div class="specs-card">
                     <div class="specs-icon"><i class="fas fa-mobile-alt"></i></div>
                     <h3>📲 التحكم الذكي:</h3>
@@ -1022,15 +1130,17 @@
                         <li><strong>مشاهدات ذكية</strong></li>
                     </ul>
                 </div>
-            </div> <div class="feature-card notes-box"> <h3>⚠️ ملاحظات هامة:</h3>
+            </div>
+            <div class="feature-card notes-box">
+                <h3>⚠️ ملاحظات هامة:</h3>
                 <ul class="warning-list">
                     <li><i class="fas fa-tools"></i> تركيب فني مختص</li>
                     <li><i class="fas fa-bolt"></i> غلايات حتى 4000 واط</li>
                     <li><i class="fas fa-tint-slash"></i> مقاوم للرطوبة (IP44)</li>
                 </ul>
             </div>
-
-            <div class="feature-card benefits-box"> <h3><i class="fas fa-lightbulb"></i> لماذا تختار مفتاح البويلر الذكي؟</h3>
+            <div class="feature-card benefits-box">
+                <h3><i class="fas fa-lightbulb"></i> لماذا تختار مفتاح البويلر الذكي؟</h3>
                 <div class="benefits-grid">
                     <div class="benefit-item">
                         <i class="fas fa-coins"></i>
@@ -1052,8 +1162,9 @@
     <section id="sensors" class="section">
         <div class="container">
              <h2>🛡️ أنظمة الحساسات الذكية</h2>
-
-             <div class="sensor-list"> <div class="feature-card sensor-item"> <div class="sensor-info">
+             <div class="sensor-list">
+                 <div class="feature-card sensor-item">
+                    <div class="sensor-info">
                         <h3>1️⃣ حساس الغاز</h3>
                         <ul class="list">
                             <li>كشف تسرب الغاز</li>
@@ -1061,13 +1172,13 @@
                             <li>ربط بقطع التيار</li>
                         </ul>
                     </div>
-                     <div class="mini-carousel-container"> <div class="mini-carousel">
+                     <div class="mini-carousel-container">
+                         <div class="mini-carousel">
                              <img src="16.png" alt="حساس الغاز 1" />
                              <img src="17.png" alt="حساس الغاز 2" />
                          </div>
                      </div>
                  </div>
-
                  <div class="feature-card sensor-item">
                     <div class="sensor-info">
                         <h3>2️⃣ حساس الحركة</h3>
@@ -1084,7 +1195,6 @@
                         </div>
                     </div>
                  </div>
-
                   <div class="feature-card sensor-item">
                      <div class="sensor-info">
                         <h3>3️⃣ حساس التواجد</h3>
@@ -1101,7 +1211,6 @@
                          </div>
                      </div>
                  </div>
-
                  <div class="feature-card sensor-item">
                     <div class="sensor-info">
                          <h3>4️⃣ حساس الأبواب/النوافذ</h3>
@@ -1118,7 +1227,6 @@
                          </div>
                      </div>
                  </div>
-
                  <div class="feature-card sensor-item">
                      <div class="sensor-info">
                          <h3>5️⃣ حساس الحرارة/الرطوبة</h3>
@@ -1135,7 +1243,9 @@
                          </div>
                      </div>
                  </div>
-            </div> <div class="feature-card"> <h3>⚡ مميزات الحساسات الذكية:</h3>
+            </div>
+            <div class="feature-card">
+                <h3>⚡ مميزات الحساسات الذكية:</h3>
                 <ul class="check-list">
                     <li><strong>تشغيل تلقائي</strong> للأنظمة</li>
                     <li><strong>تكامل كامل</strong> مع المنزل الذكي</li>
@@ -1143,8 +1253,8 @@
                     <li><strong>مقاومة للعوامل الجوية</strong> (خارجي)</li>
                 </ul>
             </div>
-
-            <div class="feature-card"> <h3>🏠 تطبيقات عملية:</h3>
+            <div class="feature-card">
+                <h3>🏠 تطبيقات عملية:</h3>
                 <ul class="list">
                     <li><strong>المطبخ:</strong> غاز + حرارة</li>
                     <li><strong>المدخل:</strong> حركة + باب</li>
@@ -1152,8 +1262,8 @@
                     <li><strong>النوافذ:</strong> مغناطيسي + رطوبة</li>
                 </ul>
             </div>
-
-            <div class="feature-card"> <p class="highlight">💡 نظام متكامل للحماية والراحة! يمكنك ربط جميع الحساسات مع:</p>
+            <div class="feature-card">
+                <p class="highlight">💡 نظام متكامل للحماية والراحة! يمكنك ربط جميع الحساسات مع:</p>
                 <ul class="list">
                     <li>نظام الإنذار</li>
                     <li>الكاميرات الأمنية</li>
@@ -1167,8 +1277,9 @@
     <section id="intercom" class="section">
         <div class="container">
              <h2>🏡🔊 نظام الإنتركم الذكي</h2>
-
-            <div class="intercom-options"> <div class="feature-card intercom-card"> <div class="intercom-details">
+            <div class="intercom-options">
+                <div class="feature-card intercom-card">
+                    <div class="intercom-details">
                         <h3>📡 1️⃣ الإنتركم السلكي</h3>
                         <h4>مواصفات النظام:</h4>
                         <ul class="list">
@@ -1190,11 +1301,12 @@
                             <li>المباني التجارية</li>
                         </ul>
                     </div>
-                    <div class="intercom-image"> <img src="30.jpeg" alt="الإنتركم السلكي" class="featured-image">
+                    <div class="intercom-image">
+                         <img src="30.jpeg" alt="الإنتركم السلكي" class="featured-image">
                     </div>
                 </div>
-
-                <div class="feature-card intercom-card"> <div class="intercom-details">
+                <div class="feature-card intercom-card">
+                    <div class="intercom-details">
                          <h3>📡 2️⃣ الإنتركم اللاسلكي</h3>
                         <h4>مواصفات النظام:</h4>
                         <ul class="list">
@@ -1216,7 +1328,8 @@
                             <li>المباني التاريخية</li>
                         </ul>
                     </div>
-                     <div class="mini-carousel-container"> <div class="mini-carousel">
+                     <div class="mini-carousel-container">
+                         <div class="mini-carousel">
                              <img src="26.png" alt="الإنتركم اللاسلكي 1" />
                              <img src="27.png" alt="الإنتركم اللاسلكي 2" />
                              <img src="28.png" alt="الإنتركم اللاسلكي 3" />
@@ -1224,7 +1337,9 @@
                          </div>
                      </div>
                 </div>
-            </div> <div class="feature-card"> <h3>🌟 مميزات مشتركة لكلا النظامين:</h3>
+            </div>
+            <div class="feature-card">
+                <h3>🌟 مميزات مشتركة لكلا النظامين:</h3>
                 <ul class="check-list">
                     <li><strong>تحكم عبر الهاتف</strong> 📱</li>
                     <li><strong>فتح الباب عن بعد</strong> 🔓</li>
@@ -1233,8 +1348,8 @@
                     <li><strong>تكامل مع أنظمة الأمن</strong> 🛡️</li>
                 </ul>
             </div>
-
-            <div class="feature-card"> <h3>⚙️ خيارات إضافية:</h3>
+            <div class="feature-card">
+                <h3>⚙️ خيارات إضافية:</h3>
                 <ul class="list">
                     <li>كاميرا بان/تيلت (180°)</li>
                     <li>رؤية ليلية (10 متر)</li>
@@ -1242,8 +1357,8 @@
                     <li>شاشات لمس</li>
                 </ul>
             </div>
-
-            <div class="feature-card"> <p class="highlight">💡 نظام متكامل للأمان والراحة! رؤية الزوار، تسجيل الأحداث، التحكم بالدخول.</p>
+            <div class="feature-card">
+                <p class="highlight">💡 نظام متكامل للأمان والراحة! رؤية الزوار، تسجيل الأحداث، التحكم بالدخول.</p>
             </div>
         </div>
     </section>
@@ -1251,8 +1366,9 @@
     <section id="voice" class="section">
         <div class="container">
              <h2>🎙️✨ نظام التحكم الصوتي الذكي</h2>
-
-             <div class="voice-devices"> <div class="feature-card voice-device-card"> <div class="voice-device-details">
+             <div class="voice-devices">
+                 <div class="feature-card voice-device-card">
+                     <div class="voice-device-details">
                         <h3>📣 1️⃣ Amazon Echo Pop</h3>
                         <h4>التصميم:</h4>
                         <p>شكل نصف كروي مدمج</p>
@@ -1276,8 +1392,8 @@
                          <img src="32.jpg" alt="Amazon Echo Pop" class="featured-image">
                      </div>
                  </div>
-
-                 <div class="feature-card voice-device-card"> <div class="voice-device-details">
+                 <div class="feature-card voice-device-card">
+                     <div class="voice-device-details">
                          <h3>📣 2️⃣ Amazon Echo Show</h3>
                         <h4>التصميم:</h4>
                         <p>شاشة ذكية مع مكبرات صوت</p>
@@ -1299,9 +1415,11 @@
                      </div>
                       <div class="voice-device-media">
                          <img src="33.webp" alt="Amazon Echo Show" class="featured-image">
-                          </div>
+                     </div>
                  </div>
-             </div> <div class="feature-card system-features"> <h3>⚡ ما يمكنك فعله بنظام التحكم الصوتي:</h3>
+             </div>
+            <div class="feature-card system-features">
+                <h3>⚡ ما يمكنك فعله بنظام التحكم الصوتي:</h3>
                 <ul class="check-list">
                     <li><strong>التحكم الكامل</strong> بالأجهزة</li>
                     <li><strong>ضبط المشاهدات</strong></li>
@@ -1316,8 +1434,8 @@
                     </li>
                 </ul>
             </div>
-
-            <div class="feature-card"> <h3>🔊 تجربة استخدام متقدمة:</h3>
+            <div class="feature-card">
+                <h3>🔊 تجربة استخدام متقدمة:</h3>
                 <div class="voice-commands">
                     <p class="command">"أليكسا، أشغل الإضاءة في غرفة المعيشة"</p>
                     <p class="command">"أليكسا، افتح ستائر النافذة الرئيسية"</p>
@@ -1325,8 +1443,8 @@
                     <p class="command">"أليكسا، شغل وضع السينما" <span>(إطفاء الإضاءة وتشغيل التلفزيون)</span></p>
                 </div>
             </div>
-
-            <div class="feature-card"> <h3>💡 لماذا تختار نظام التحكم الصوتي؟</h3>
+            <div class="feature-card">
+                <h3>💡 لماذا تختار نظام التحكم الصوتي؟</h3>
                 <ul class="check-list">
                     <li><strong>سهولة الاستخدام</strong></li>
                     <li><strong>تحكم متكامل</strong></li>
@@ -1334,8 +1452,8 @@
                     <li><strong>تحديثات مستمرة</strong></li>
                 </ul>
             </div>
-
-             <div class="feature-card"> <h3>🎬 عرض توضيحي عام:</h3>
+             <div class="feature-card">
+                <h3>🎬 عرض توضيحي عام:</h3>
                 <div class="voice-device-media">
                     <video src="31.mp4" controls class="featured-video"></video>
                 </div>
@@ -1346,16 +1464,16 @@
     <section id="app" class="section">
         <div class="container">
              <h2>📱🏠 واجهة التحكم عبر الهاتف - تطبيق Smart Life</h2>
-
-            <div class="feature-card"> <h3>🌟 نظرة عامة:</h3>
+            <div class="feature-card">
+                <h3>🌟 نظرة عامة:</h3>
                 <ul class="list">
                     <li>مركز تحكم متكامل</li>
                     <li>واجهة بسيطة وسهلة</li>
                     <li>إدارة جميع الأجهزة</li>
                 </ul>
             </div>
-
-            <div class="feature-card"> <h3>🔧 الميزات الرئيسية:</h3>
+            <div class="feature-card">
+                <h3>🔧 الميزات الرئيسية:</h3>
                 <ul class="check-list">
                     <li><strong>التحكم الشامل</strong></li>
                     <li><strong>مشاهد ذكية</strong></li>
@@ -1364,39 +1482,41 @@
                     <li><strong>تحكم عن بعد</strong></li>
                 </ul>
             </div>
-
-            <div class="feature-card"> <h3>📲 مميزات تقنية:</h3>
+            <div class="feature-card">
+                <h3>📲 مميزات تقنية:</h3>
                 <ul class="list">
                     <li>دعم Android/iOS/Huawei</li>
                     <li>واجهة متعددة اللغات (عربي)</li>
                     <li>تحديثات دورية</li>
                 </ul>
              </div>
-
-             <div class="feature-card"> <h3>🔐 الأمان:</h3>
+             <div class="feature-card">
+                <h3>🔐 الأمان:</h3>
                 <ul class="check-list">
                     <li>تشفير عالي للبيانات</li>
                     <li>مصادقة متعددة</li>
                     <li>أذونات مخصصة</li>
                 </ul>
              </div>
-
-            <div class="feature-card"> <h3>🌍 التكامل مع أنظمة أخرى:</h3>
+            <div class="feature-card">
+                <h3>🌍 التكامل مع أنظمة أخرى:</h3>
                 <ul class="check-list">
                     <li>دعم Alexa / Google Assistant</li>
                     <li>تكامل مع IFTTT</li>
                     <li>متوافق مع أنظمة الأتمتة</li>
                 </ul>
             </div>
-
-            <div class="feature-card"> <h3>📱 واجهة تطبيق Smart Life</h3>
-                 <div style="text-align: center;"> <img src="34.jpg" alt="واجهة تطبيق Smart Life" class="featured-image" style="max-height: 500px;" />
+            <div class="feature-card">
+                <h3>📱 واجهة تطبيق Smart Life</h3>
+                 <div style="text-align: center;">
+                    <img src="34.jpg" alt="واجهة تطبيق Smart Life" class="featured-image" style="max-height: 500px;" />
                  </div>
             </div>
-
-            <div class="feature-card"> <h3>📥 تنزيل التطبيق بسهولة</h3>
+            <div class="feature-card">
+                <h3>📥 تنزيل التطبيق بسهولة</h3>
                 <h4>امسح الرمز أو اختر المتجر المناسب:</h4>
-                 <div style="text-align:center;"> <img src="35.png" alt="رمز QR لتطبيق Smart Life" class="app-qr-code">
+                 <div style="text-align:center;">
+                     <img src="35.png" alt="رمز QR لتطبيق Smart Life" class="app-qr-code">
                     <div class="app-buttons">
                         <a href="https://play.google.com/store/apps/details?id=com.tuya.smartlife" target="_blank">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="تحميل من Google Play">
@@ -1404,7 +1524,7 @@
                         <a href="https://apps.apple.com/app/id1115101477" target="_blank">
                             <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="تحميل من App Store">
                         </a>
-                        </div>
+                    </div>
                  </div>
             </div>
         </div>
@@ -1414,8 +1534,8 @@
 
 <footer>
     <div class="container">
-        © <script>document.write(new Date().getFullYear())</script> كل الحقوق محفوظة - نظام المنزل الذكي
-    </div>
+        © <script>document.write(new Date().getFullYear())</script> كل الحقوق محفوظة - نظام المنزل الذكي | تم التطوير بواسطة <a href=" " target="_blank" style="color: var(--white);">PIH</a>
+        </div>
 </footer>
 
 
@@ -1424,6 +1544,7 @@
         // --- Navigation Menu Toggle ---
         const burgerBtn = document.getElementById('burgerMenuBtn');
         const navLinks = document.getElementById('mainNavLinks');
+        const navLinkItems = navLinks.querySelectorAll('a'); // Get all links in the nav
 
         if (burgerBtn && navLinks) {
             burgerBtn.addEventListener('click', function(event) {
@@ -1431,20 +1552,23 @@
                 navLinks.classList.toggle('active');
             });
 
-            // Get all links in the nav to close menu on click
-            const navLinkItems = navLinks.querySelectorAll('a');
+            // Close menu when a link is clicked (needed for smooth scroll)
             navLinkItems.forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
+                link.addEventListener('click', (event) => {
+                    // Check if the link is for a section on the same page
+                    if (link.getAttribute('href').startsWith('#')) {
+                         navLinks.classList.remove('active');
+                         // Smooth scroll is handled by the specific handler below
+                    }
                 });
             });
 
             // Close menu if clicked outside
             document.addEventListener('click', function(event) {
                 const isClickInsideNav = navLinks.contains(event.target);
-                const isClickOnBurger = burgerBtn.contains(event.target); // Already handled by stopPropagation
+                const isClickOnBurger = burgerBtn.contains(event.target); // Burger click handled above
 
-                if (!isClickInsideNav && navLinks.classList.contains('active')) {
+                if (!isClickInsideNav && !isClickOnBurger && navLinks.classList.contains('active')) {
                     navLinks.classList.remove('active');
                 }
             });
@@ -1452,12 +1576,46 @@
             console.error("Burger button or navigation links container not found.");
         }
 
-        // --- Carousel Logic (For Single Image Sliders like Lighting, Curtains) ---
-        const mainCarousels = document.querySelectorAll('.carousel-container:not(:has(.mini-carousel))'); // Select only main containers
+        // --- Smooth Scrolling for ALL Internal Links (Sidebar + Intro Carousel) ---
+         // Select links from both sidebar and intro carousel using the shared class
+         const internalNavLinks = document.querySelectorAll('a.intro-nav-link');
 
-        mainCarousels.forEach(container => {
+        internalNavLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                const href = this.getAttribute('href');
+
+                // Check if it's an internal link starting with #
+                if (href && href.startsWith('#')) {
+                    event.preventDefault(); // Prevent default anchor jump
+
+                    const targetId = href.substring(1); // Remove '#'
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        // Calculate offset for fixed header (adjust 60 if your nav height changes)
+                        const headerOffset = 60;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+
+                         // We already have logic to close sidebar when links inside it are clicked.
+                         // No extra close needed here unless click originated from somewhere else.
+                    }
+                }
+            });
+        });
+
+
+        // --- Carousel Logic (Applies to ALL Carousels including Intro) ---
+        const allCarousels = document.querySelectorAll('.carousel-container'); // Select ALL carousel containers
+
+        allCarousels.forEach(container => {
             const carousel = container.querySelector('.carousel');
-            if (!carousel) return; // Skip if no carousel element found
+            if (!carousel) return;
 
             const slides = carousel.querySelectorAll('.carousel-slide');
             const prevBtn = container.querySelector('.carousel-btn.prev');
@@ -1465,9 +1623,19 @@
             let currentIndex = 0;
             const totalSlides = slides.length;
 
+            // Hide buttons if only one slide
+             if (totalSlides <= 1) {
+                if (prevBtn) prevBtn.style.display = 'none';
+                if (nextBtn) nextBtn.style.display = 'none';
+             } else {
+                 if (prevBtn) prevBtn.style.display = 'block';
+                 if (nextBtn) nextBtn.style.display = 'block';
+             }
+
+
             function showSlide(index) {
                 if (totalSlides === 0) return;
-                // Ensure index is within bounds
+                // Ensure index is within bounds and loops correctly
                  currentIndex = (index + totalSlides) % totalSlides;
 
                 slides.forEach((slide, i) => {
@@ -1498,9 +1666,6 @@
 
          // --- Mini Carousel Logic (For horizontal scroll like Sensors, Intercom) ---
          // No specific JS needed for basic scroll functionality if CSS handles overflow and snapping.
-         // If you needed programmatic control (e.g., auto-play, specific slide jumps),
-         // you would add JS similar to the main carousel but targeting '.mini-carousel-container'.
-
 
     });
 </script>
