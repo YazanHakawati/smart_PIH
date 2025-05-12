@@ -1,0 +1,771 @@
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap');
+
+:root {
+  --primary-light: #63e2d1;
+  --primary-medium: #4fb3a9;
+  --primary-dark: #378f85;
+  --accent: #297d72;
+  --black: #333333;
+  --white: #ffffff;
+  --gray-light: #f5f5f5;
+  --gray-medium: #e0e0e0;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Almarai', sans-serif;
+}
+
+body {
+  background: linear-gradient(-45deg, #63e2d1, #4fb3a9, #378f85, #297d72);
+  background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
+  color: var(--black);
+  direction: rtl;
+  scroll-behavior: smooth;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px 0;
+  text-align: center;
+  box-shadow: 0 2px 10px var(--shadow);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--black);
+}
+
+.main-nav {
+  background-color: var(--primary-dark);
+  padding: 15px 0;
+}
+
+.main-nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.main-nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.main-nav a:hover {
+  background-color: var(--primary-medium);
+}
+
+.vertical-scroll {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+/* ... other CSS rules ... */
+
+.sensor-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.sensor-item {
+    display: flex;
+    flex-direction: column; /* Stack info and carousel vertically */
+    gap: 15px;
+    background: var(--gray-light);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px var(--shadow);
+    align-items: stretch; /* Make children take full width */
+}
+
+.sensor-info {
+    /* flex: 1; Removed flex to allow stacking */
+}
+
+.mini-carousel-container {
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--shadow);
+    cursor: pointer; /* Indicate it's clickable */
+}
+
+.mini-carousel {
+    display: flex;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    width: 75%; /* Ensure it takes the full width of the container */
+}
+
+.mini-carousel img {
+    flex-shrink: 0;
+    width: 100%; /* Make images fill the carousel width */
+    height: auto;
+    border-radius: 8px;
+    object-fit: contain; /* Or 'cover' depending on desired fit */
+}
+
+.sensor-item h3 {
+    margin-top: 0;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+.sensor-item ul {
+    margin-top: 0;
+}
+
+.section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.section h2 {
+  font-size: 2rem;
+  color: var(--primary-dark);
+  margin-bottom: 20px;
+}
+
+.section h3 {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+.section ul {
+  list-style: none;
+  margin-top: 10px;
+}
+
+.section ul li {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.highlight {
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--primary-medium);
+}
+
+/* سلايدر الصور */
+.carousel-container {
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 15px;
+  padding: 10px;
+}
+
+.carousel img {
+  flex-shrink: 0;
+  width: 220px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+/* ... other CSS rules ... */
+
+.intercom-options {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.intercom-card {
+    background: var(--gray-light);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px var(--shadow);
+    display: flex;
+    flex-direction: column; /* Stack details and image/carousel */
+    gap: 15px;
+}
+
+.intercom-details {
+    /* flex: 1; Removed flex to allow stacking */
+}
+
+.intercom-image {
+    text-align: center;
+    margin-top: 15px; /* Add some space above the single image */
+}
+
+.intercom-single-image {
+    max-width: 65%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+.mini-carousel-container {
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--shadow);
+    cursor: pointer;
+    width: 100%; /* Ensure it takes full width of the card */
+}
+
+.mini-carousel {
+    display: flex;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    width: 75%;
+}
+
+.mini-carousel img {
+    flex-shrink: 0;
+    width: 75%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: contain; /* Or 'cover' */
+}
+
+.intercom-card h3 {
+    margin-top: 0;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+.intercom-card h4 {
+    color: var(--accent);
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.carousel img:hover {
+  transform: scale(1.05);
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  background-color: #ffffffdd;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+.carousel-btn:hover {
+  background-color: var(--primary-light);
+}
+
+.carousel-btn.prev {
+  right: 10px;
+}
+
+.carousel-btn.next {
+  left: 10px;
+}
+
+/* أنماط جديدة للأبجورات */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.feature-card {
+  background: var(--gray-light);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px var(--shadow);
+  transition: transform 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.specs-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.specs-box {
+  flex: 1;
+  min-width: 300px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px var(--shadow);
+}
+
+.check-list li {
+  position: relative;
+  padding-right: 25px;
+  margin-bottom: 10px;
+}
+
+.check-list li:before {
+  content: "✓";
+  color: var(--primary-medium);
+  font-weight: bold;
+  position: absolute;
+  right: 0;
+}
+
+.control-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.control-list i {
+  color: var(--primary-dark);
+  width: 20px;
+  text-align: center;
+}
+
+.tip-box {
+  background: var(--primary-light);
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  border-right: 4px solid var(--accent);
+}
+/* أنماط قسم البويلر */
+.boiler-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.boiler-intro {
+  flex: 1;
+  min-width: 300px;
+}
+
+.boiler-image {
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+}
+
+.featured-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  max-height: 300px;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 40px 0;
+}
+
+.specs-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px var(--shadow);
+  border-top: 4px solid var(--primary-medium);
+}
+
+.specs-icon {
+  font-size: 2rem;
+  color: var(--primary-dark);
+  margin-bottom: 15px;
+}
+
+.icon-list li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notes-box {
+  background: #fff8e6;
+  border-right: 4px solid #ffcc00;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 30px 0;
+}
+
+.warning-list li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.warning-list i {
+  color: #ff9900;
+}
+
+.benefits-box {
+  background: var(--gray-light);
+  padding: 25px;
+  border-radius: 12px;
+  margin-top: 40px;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.benefit-item {
+  text-align: center;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+}
+
+.benefit-item i {
+  font-size: 2rem;
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+}
+/* ... other CSS rules ... */
+
+.voice-devices {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.voice-device-card {
+    background: var(--gray-light);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.voice-device-details {
+    /* flex: 2; Removed flex to allow stacking */
+}
+
+.voice-device-image {
+    text-align: center;
+}
+
+.voice-image {
+    max-width: 50%; /* Adjust as needed to fit within the card */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--shadow);
+    margin-top: 10px;
+}
+
+.video-placeholder {
+    font-size: 0.9rem;
+    color: var(--primary-medium);
+    margin-top: 10px;
+}
+/* ... other CSS rules ... */
+
+.voice-device-media {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.voice-video {
+    max-width: 80%; /* Adjust as needed */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+.voice-device-card h3 {
+    margin-top: 0;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+.voice-device-card h4 {
+    color: var(--accent);
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+/* Voice Control Section Styles */
+#voice .content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.voice-devices {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin-bottom: 2rem;
+}
+
+/* Feature Card Base Style */
+.feature-card {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Device Specific Styles */
+.voice-device .device-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.voice-device .device-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #2d3748;
+  flex: 1;
+}
+
+.device-image {
+  max-height: 120px;
+  width: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-left: 1rem;
+}
+
+.device-media {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.demo-video {
+  width: 100%;
+  border-radius: 8px;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Detail Groups */
+.detail-group {
+  margin-bottom: 1.5rem;
+}
+
+.detail-group h4 {
+  color: #4a5568;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+/* List Styles */
+.check-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.check-list li {
+  padding: 0.5rem 0.5;
+  display: flex;
+  align-items: center;
+  color: #4a5568;
+}
+
+.check-list li::before {
+  content: "✓";
+  color: #48bb78;
+  margin-left: 0 rem;
+  margin-right: 0 rem;
+}
+
+.usage-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.5rem;
+}
+
+.usage-list li {
+  background: #f7fafc;
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+}
+
+/* System Features */
+.system-features .check-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.integration-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 1rem;
+}
+
+.integration-list li {
+  position: relative;
+  padding-left: 1rem;
+  font-style: italic;
+  color: #718096;
+}
+
+.integration-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #48bb78;
+}
+
+/* Voice Commands */
+.voice-commands {
+  display: grid;
+  gap: 1rem;
+}
+
+.command {
+  background: #f7fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #4299e1;
+  margin: 0;
+  font-weight: 500;
+  color: #2d3748;
+  transition: all 0.2s ease;
+}
+
+.command:hover {
+  background: #ebf8ff;
+  transform: translateX(5px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .voice-devices {
+    grid-template-columns: 1fr;
+  }
+  .smartlife-options {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .smartlife-card {
+    width: 48%;
+  }
+.smartlife-single-image {
+  width: 50%;
+  max-width: 50px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: contain;
+}
+  .device-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .device-image {
+    margin: 1rem 0 0 0;
+  }
+  
+  .demo-video {
+    height: 150px;
+  }
+  
+  .system-features .check-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* التأكيد على النقاط المهمة */
+strong {
+  color: var(--primary-dark);
+}
+footer {
+  background-color: #ffffffcc;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9rem;
+  color: var(--black);
+}
+
